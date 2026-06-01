@@ -26,19 +26,24 @@ function Login() {
         formData
       );
 
-      localStorage.setItem(
+      sessionStorage.setItem(
         "token",
         res.data.token
       );
 
-      localStorage.setItem(
+      sessionStorage.setItem(
         "user",
         JSON.stringify(res.data.user)
       );
 
       alert("Login Successful");
 
-      navigate("/dashboard");
+      const redirectPath =
+        res.data.user?.role === "recruiter"
+          ? "/recruiter-dashboard"
+          : "/dashboard";
+
+      navigate(redirectPath);
     } catch (error) {
       alert(
         error.response?.data?.message ||

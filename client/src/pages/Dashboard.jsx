@@ -1,6 +1,6 @@
 function Dashboard() {
   const user = JSON.parse(
-    localStorage.getItem("user")
+    sessionStorage.getItem("user")
   );
 
   return (
