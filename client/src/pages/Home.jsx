@@ -6,7 +6,7 @@ function Home() {
   return (
     <div className="container mt-5 text-center">
       <h1>Welcome to HireHub</h1>
-
+      <h2>Thank you for Choosing our platform!!</h2>
       <p className="lead">
         AI Powered Job Portal with ATS Resume Analyzer
       </p>
