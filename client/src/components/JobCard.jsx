@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import API from "../services/api";
 
 function JobCard({ job }) {
@@ -42,11 +43,13 @@ function JobCard({ job }) {
   return (
     <div className="card mb-3 shadow-sm">
       <div className="card-body">
-        <h4 className="card-title">{job.title}</h4>
+        <Link to={`/job/${job._id}`} className="text-decoration-none">
+          <h4 className="card-title">{job.title}</h4>
+        </Link>
         <h6 className="card-subtitle mb-2 text-muted">
           {job.company} • {job.location}
         </h6>
-        <p className="card-text">{job.description}</p>
+        <p className="card-text">{job.description.substring(0, 150)}...</p>
         {job.salary && (
           <p className="card-text">
             <strong>Salary:</strong> {job.salary}
@@ -56,18 +59,22 @@ function JobCard({ job }) {
           Posted by: {postedBy.name || "Unknown"}
         </p>
 
-        {user?.role === "jobseeker" && (
-          <div className="mt-3">
+        <div className="mt-3">
+          <Link to={`/job/${job._id}`} className="btn btn-info btn-sm me-2">
+            View Details
+          </Link>
+
+          {user?.role === "jobseeker" && (
             <button
-              className="btn btn-primary"
+              className="btn btn-primary btn-sm"
               type="button"
               onClick={handleApply}
               disabled={disabled}
             >
-              {disabled ? "Applied" : "Apply"}
+              {disabled ? "Applied" : "Quick Apply"}
             </button>
-          </div>
-        )}
+          )}
+        </div>
 
         {status && (
           <div className="alert alert-success mt-3">{status}</div>
